@@ -1,20 +1,55 @@
+import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { GestureHandlerRootView, PanGestureHandler } from 'react-native-gesture-handler';
+
+import GameController from './src/components/GameController.jsx';
 
 export default function App() {
+
+  const [direction, setDirection] = useState();
+
+  const handleDirection = (path) => {
+    setDirection(path)
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+    <SafeAreaView style= {styles.container}>
+      <View style= {styles.gameContainer}>
+        <Text>{direction}</Text>
+      </View>
+      <View style= {styles.controllerContainer}>
+        <GameController handleDirection= {handleDirection}/>
+      </View>
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
+    flex: 7,
+    margin: 20,
+  },
+
+  gameContainer: {
+    flex: 5,
+    backgroundColor: 'green',
     alignItems: 'center',
     justifyContent: 'center',
+    borderColor: 'black',
+    borderWidth: 1,
   },
+
+  controllerContainer: {
+    flex: 2,
+    backgroundColor: 'grey',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: 'red',
+    borderWidth: 1,
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
+  }
+
 });
