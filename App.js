@@ -28,7 +28,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 7,
+    flex: 8,
     margin: 20,
   },
 
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
 
   controllerContainer: {
-    flex: 2,
+    flex: 3,
     backgroundColor: 'grey',
     alignItems: 'center',
     justifyContent: 'center',
