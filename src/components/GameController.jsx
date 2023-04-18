@@ -5,7 +5,7 @@ import ArrowButtons from './ArrowButtons.jsx';
 import ABbuttons from './ABbuttons.jsx';
 import SelectStartButtons from './SelectStartButtons.jsx';
 
-const GameboyController = () => {
+const GameController = () => {
   return (
     <View style= {styles.gamePadController}>
 
@@ -34,4 +34,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default GameboyController;
+export default GameController;

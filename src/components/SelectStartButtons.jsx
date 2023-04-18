@@ -6,23 +6,20 @@ const SelectStartButtons = () => {
     <View style= {styles.startSelectContainer}>
       <View style= {styles.layoutContainer}>
         <View style= {styles.buttonsContainer}>
-          <TouchableOpacity>
-            <View style= {styles.longButtonTextContainer}>
-              <View style= {styles.longButton}></View>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <View style= {styles.longButtonTextContainer}>
-              <View style= {styles.longButton}></View>
-            </View>
-          </TouchableOpacity>
-        </View>
-
-        <View style= {styles.buttonsContainer}>
-          <View style= {styles.longButtonTextContainer}>
+          <View style= {styles.buttonTextLayout}>
+            <TouchableOpacity>
+              <View style= {styles.longButtonTextContainer}>
+                <View style= {styles.longButton}></View>
+              </View>
+            </TouchableOpacity>
             <Text>Select</Text>
           </View>
-          <View style= {styles.longButtonTextContainer}>
+          <View style= {styles.buttonTextLayout}>
+            <TouchableOpacity>
+              <View style= {styles.longButtonTextContainer}>
+                <View style= {styles.longButton}></View>
+              </View>
+            </TouchableOpacity>
             <Text>Start</Text>
           </View>
         </View>
@@ -47,6 +44,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
   },
+  buttonTextLayout: {
+    alignItems: 'center',
+  },
   longButtonTextContainer: {
     justifyContent: 'space-between',
     alignItems: 'space-between',
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   longButton: {
     width: 40,
     height: 15,
-    backgroundColor: 'black',
+    backgroundColor: '#2B2B2B',
     marginBottom: 5,
     borderRadius: 15,
   },
