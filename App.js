@@ -10,6 +10,8 @@ export default function App() {
 
   const [arrowDirection, setArrowDirection] = useState();
   const [toggleUpDown, setToggleUpDown] = useState(true);
+  const [pressedA, setPressedA] = useState('');
+  const [pressedB, setPressedB] = useState('');
 
   const handleDirection = (direction) => {
     setArrowDirection(direction)
@@ -18,14 +20,34 @@ export default function App() {
     }
   }
 
+  const handleA = (button) => {
+    if (button === 'A') {
+      setPressedA('A');
+    } else {
+      setPressedA();
+    }
+    setPressedB('');
+
+  }
+
+  const handleB = (button) => {
+    if (button === 'B') {
+      setPressedB('B');
+    } else {
+      setPressedB();
+    }
+    setPressedA('');
+
+  }
+
   return (
     <SafeAreaView style= {styles.container}>
       <View style= {styles.gameContainer}>
         <View style= {styles.powerButton}></View>
-        <GameScreen arrowDirection= {arrowDirection} toggleUpDown= {toggleUpDown}/>
+        <GameScreen arrowDirection= {arrowDirection} toggleUpDown= {toggleUpDown} pressedA= {pressedA} pressedB= {pressedB} handleA= {handleA}/>
       </View>
       <View style= {styles.controllerContainer}>
-        <GameController handleDirection= {handleDirection}/>
+        <GameController handleDirection= {handleDirection} handleA= {handleA} handleB = {handleB}/>
       </View>
       <StatusBar style="auto" />
     </SafeAreaView>

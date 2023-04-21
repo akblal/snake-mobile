@@ -2,7 +2,9 @@ import React, {useState, useEffect} from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { useFonts } from 'expo-font';
 
-const SelectGame = ({ arrowDirection, toggleUpDown }) => {
+import SelectGameModal from './SelectGameModal.jsx';
+
+const SelectGame = ({ arrowDirection, toggleUpDown, pressedA, pressedB, handleA }) => {
 
   const gameList = [
     {
@@ -30,15 +32,17 @@ const SelectGame = ({ arrowDirection, toggleUpDown }) => {
 
   const [gameID, setGameID] = useState(0);
   const [showText, setShowText] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
 
+  // Change the state per set time to allow for blinking effect.
   useEffect(() => {
-    // Change the state per set time to allow for blinking effect.
     const interval = setInterval(() => {
       setShowText((showText) => !showText);
     }, 750);
     return () => clearInterval(interval);
   }, []);
 
+  //Matching the arrow to the game title
   useEffect(() => {
     if(arrowDirection === 'down') {
       if (gameID < 6) {
@@ -51,8 +55,13 @@ const SelectGame = ({ arrowDirection, toggleUpDown }) => {
         setGameID(counter)
       }
     }
-
   }, [toggleUpDown])
+
+  useEffect(() => {
+    if (pressedA) {
+      setModalVisible(true)
+    }
+  }, [pressedA])
 
   let [fontsLoaded] = useFonts({
     'PressStart2P': require('../../assets/fonts/PressStart2P-Regular.ttf'),
@@ -62,10 +71,18 @@ const SelectGame = ({ arrowDirection, toggleUpDown }) => {
     return undefined
   }
 
+  const handleModalVisible = (command) => {
+    if (command === 'close') {
+      setModalVisible(false)
+      handleA();
+    }
+
+  }
+
   return (
     <View style= {styles.selectGameContainer}>
       <View style= {styles.titleContainer}>
-        <Text style= {styles.font}>Select Game</Text>
+        <Text style= {styles.font}>Select Game {pressedA} {pressedB}</Text>
       </View>
       <View style= {styles.gameSelectionContainer}>
         <Text style= {styles.font}>List of Games</Text>
@@ -73,26 +90,29 @@ const SelectGame = ({ arrowDirection, toggleUpDown }) => {
           <View style= {styles.gameList}>
             {gameList.map((game, id) => {
 
+              if (id === gameID && pressedA) {
+                return <SelectGameModal modalVisible= {modalVisible} handleModalVisible= {handleModalVisible} handleA= {handleA}/>
+              }
               if (id === gameID) {
                 return (
-                  <View style= {styles.highlightedGame}>
+                  <View style= {styles.highlightedGame} key= {id}>
                     <Text style= {styles.font}>></Text>
-                    <Text style= {[styles.font, styles.gameTitle,{color: id === gameID && showText ? 'black' : 'teal'} ]} id = {id}>{game.name}</Text>
+                    <Text style= {[styles.font, styles.gameTitle,{color: id === gameID && showText ? 'black' : 'teal'} ]}>{game.name}</Text>
                   </View>
                 )
               } else {
                 return (
-                  <View style= {styles.highlightedGame}>
+                  <View style= {styles.highlightedGame} key= {id}>
                     <Text style= {[styles.font, {color: 'teal'}]}>></Text>
-                    <Text style= {[styles.font, styles.gameTitle]} id = {id}>{game.name}</Text>
+                    <Text style= {[styles.font, styles.gameTitle]} >{game.name}</Text>
                   </View>
                 )
               }
             })}
           </View>
         </View>
+        <Text>{pressedA}</Text>
       </View>
-      <Text>{gameID}</Text>
     </View>
   );
 };

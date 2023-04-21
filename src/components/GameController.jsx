@@ -5,13 +5,13 @@ import ArrowButtons from './ArrowButtons.jsx';
 import ABbuttons from './ABbuttons.jsx';
 import SelectStartButtons from './SelectStartButtons.jsx';
 
-const GameController = ({ handleDirection }) => {
+const GameController = ({ handleDirection, handleA, handleB }) => {
   return (
     <View style= {styles.gamePadController}>
 
       <View style= {styles.arrowABController}>
         <ArrowButtons handleDirection= {handleDirection}/>
-        <ABbuttons />
+        <ABbuttons handleA= {handleA} handleB= {handleB}/>
       </View>
 
       <SelectStartButtons />

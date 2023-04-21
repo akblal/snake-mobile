@@ -4,7 +4,7 @@ import { useFonts } from 'expo-font';
 
 import SelectGame from './SelectGame.jsx';
 
-const GameScreen = ({ arrowDirection, toggleUpDown }) => {
+const GameScreen = ({ arrowDirection, toggleUpDown, pressedA, pressedB, handleA }) => {
   let [fontsLoaded] = useFonts({
     'PressStart2P': require('../../assets/fonts/PressStart2P-Regular.ttf'),
   })
@@ -15,9 +15,7 @@ const GameScreen = ({ arrowDirection, toggleUpDown }) => {
 
   return (
     <View style= {styles.gameScreenContainer}>
-      <SelectGame arrowDirection= {arrowDirection} toggleUpDown= {toggleUpDown}/>
-
-
+      <SelectGame arrowDirection= {arrowDirection} toggleUpDown= {toggleUpDown} pressedA= {pressedA} pressedB= {pressedB} handleA= {handleA}/>
     </View>
   );
 };
