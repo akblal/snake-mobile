@@ -8,17 +8,21 @@ import GameScreen from './src/components/GameScreen.jsx';
 
 export default function App() {
 
-  const [direction, setDirection] = useState();
+  const [arrowDirection, setArrowDirection] = useState();
+  const [toggleUpDown, setToggleUpDown] = useState(true);
 
-  const handleDirection = (path) => {
-    setDirection(path)
+  const handleDirection = (direction) => {
+    setArrowDirection(direction)
+    if (direction === 'up' || direction === 'down') {
+      setToggleUpDown(!toggleUpDown)
+    }
   }
 
   return (
     <SafeAreaView style= {styles.container}>
       <View style= {styles.gameContainer}>
         <View style= {styles.powerButton}></View>
-        <GameScreen />
+        <GameScreen arrowDirection= {arrowDirection} toggleUpDown= {toggleUpDown}/>
       </View>
       <View style= {styles.controllerContainer}>
         <GameController handleDirection= {handleDirection}/>
