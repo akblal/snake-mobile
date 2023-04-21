@@ -32,7 +32,7 @@ const SelectGame = ({ arrowDirection, toggleUpDown }) => {
   const [showText, setShowText] = useState(true);
 
   useEffect(() => {
-    // Change the state every second or the time given by User.
+    // Change the state per set time to allow for blinking effect.
     const interval = setInterval(() => {
       setShowText((showText) => !showText);
     }, 750);
@@ -41,7 +41,7 @@ const SelectGame = ({ arrowDirection, toggleUpDown }) => {
 
   useEffect(() => {
     if(arrowDirection === 'down') {
-      if (gameID < 5) {
+      if (gameID < 6) {
         let counter = gameID + 1;
         setGameID(counter)
       }
@@ -70,21 +70,27 @@ const SelectGame = ({ arrowDirection, toggleUpDown }) => {
       <View style= {styles.gameSelectionContainer}>
         <Text style= {styles.font}>List of Games</Text>
         <View style= {styles.gameListContainer}>
-          <View>
-            <Text style= {styles.font}>></Text>
-          </View>
           <View style= {styles.gameList}>
             {gameList.map((game, id) => {
 
-              return   <Text style= {[styles.font, styles.gameTitle,{color: id === gameID && showText ? 'black' : 'teal'} ]} id = {id}>{game.name}</Text>
-
-
+              if (id === gameID) {
+                return (
+                  <View style= {styles.highlightedGame}>
+                    <Text style= {styles.font}>></Text>
+                    <Text style= {[styles.font, styles.gameTitle,{color: id === gameID && showText ? 'black' : 'teal'} ]} id = {id}>{game.name}</Text>
+                  </View>
+                )
+              } else {
+                return (
+                  <View style= {styles.highlightedGame}>
+                    <Text style= {[styles.font, {color: 'teal'}]}>></Text>
+                    <Text style= {[styles.font, styles.gameTitle]} id = {id}>{game.name}</Text>
+                  </View>
+                )
+              }
             })}
-            <Text>{arrowDirection}</Text>
           </View>
-
         </View>
-
       </View>
       <Text>{gameID}</Text>
     </View>
@@ -123,13 +129,10 @@ const styles = StyleSheet.create({
   },
   gameTitle: {
     fontFamily: 'PressStart2P',
-    marginBottom: 5,
+    marginBottom: 10,
   },
-  blinkOn: {
-    color: 'teal',
-  },
-  blinkOff: {
-    color: 'black',
+  highlightedGame: {
+    flexDirection: 'row',
   },
 
 });
