@@ -17,16 +17,16 @@ const SelectGame = ({ arrowDirection, toggleUpDown, pressedA, pressedB, handleA 
       name: 'Bomberman',
     },
     {
-      name: 'Pokemon',
+      name: 'Pokemon Red',
     },
     {
-      name: 'Metroid Prime',
+      name: 'Metroid II',
     },
     {
       name: 'Super Mario Bros.',
     },
     {
-      name: 'Zelda: Ocarina of Time',
+      name: 'Zelda',
     },
   ]
 
@@ -90,9 +90,9 @@ const SelectGame = ({ arrowDirection, toggleUpDown, pressedA, pressedB, handleA 
           <View style= {styles.gameList}>
             {gameList.map((game, id) => {
 
-              if (id === gameID && pressedA) {
-                return <SelectGameModal modalVisible= {modalVisible} handleModalVisible= {handleModalVisible} handleA= {handleA}/>
-              }
+              {/* if (id === gameID && pressedA) {
+                return <SelectGameModal modalVisible= {modalVisible} handleModalVisible= {handleModalVisible} handleA= {handleA} game= {game}/>
+              } */}
               if (id === gameID) {
                 return (
                   <View style= {styles.highlightedGame} key= {id}>
@@ -109,9 +109,14 @@ const SelectGame = ({ arrowDirection, toggleUpDown, pressedA, pressedB, handleA 
                 )
               }
             })}
+            {gameList.map((game, id) => {
+
+              if (id === gameID && pressedA) {
+                return <SelectGameModal modalVisible= {modalVisible} handleModalVisible= {handleModalVisible} handleA= {handleA} game= {game}/>
+              }
+            })}
           </View>
         </View>
-        <Text>{pressedA}</Text>
       </View>
     </View>
   );

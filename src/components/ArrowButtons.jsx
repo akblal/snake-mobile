@@ -33,7 +33,7 @@ const ArrowButtons = ({ handleDirection }) => {
 const styles = StyleSheet.create({
   arrowPadContainer: {
     alignItems: 'center',
-    // borderWidth: 1
+    zIndex: 3,
   },
   buttonContainer: {
     flexDirection: 'row',
