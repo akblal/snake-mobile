@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, Modal, Pressable, SafeAreaView, Image } from 'react-native';
 import { useFonts } from 'expo-font';
 
 const SelectGameModal = ({ modalVisible, handleModalVisible, handleA, game }) => {
-
-  const [imgSource, setIMGSource] = useState('')
 
   let [fontsLoaded] = useFonts({
     'PressStart2P': require('../../assets/fonts/PressStart2P-Regular.ttf'),
@@ -13,11 +11,6 @@ const SelectGameModal = ({ modalVisible, handleModalVisible, handleA, game }) =>
   if (!fontsLoaded) {
     return undefined
   }
-  // useEffect(() => {
-  //   if (game.name === 'Snake') {
-  //     setIMGSource('../../assets/images/gameCover/Snake.jpeg')
-  //   }
-  // },[])
 
   return (
 
