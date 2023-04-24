@@ -25,11 +25,11 @@ const styles = StyleSheet.create({
     height: '85%',
     width: '85%',
     backgroundColor: 'teal',
-    borderWidth: 5,
-    borderColor: 'red',
+    // borderWidth: 5,
+    // borderColor: 'red',
     alignItems: 'center',
     borderRadius: 10,
-    borderWidth:3,
+
   },
 });
 
