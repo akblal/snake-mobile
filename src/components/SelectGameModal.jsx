@@ -31,6 +31,7 @@ const SelectGameModal = ({ modalVisible, handleModalVisible, handleA, game }) =>
                           game.name === 'Super Mario Bros' ? require('../../assets/images/gameCover/SuperMarioBros.jpeg') :
                           require('../../assets/images/gameCover/Zelda.jpeg')
                         }
+               resizeMode= 'contain'
               />
             </View>
             <View style= {styles.buttonRow}>
@@ -94,10 +95,13 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: 'pink',
   },
   image: {
     flex: 1,
     width: '100%',
+    borderRadius: 40,
+    overflow: 'hidden',
   },
   buttonRow: {
     flex: 0.5,
