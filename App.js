@@ -21,10 +21,14 @@ export default function App() {
   }
 
   const handleA = (button) => {
-    if (button === 'A') {
+    if (button === 'A' && pressedA.slice(-1) === 'A') {
+      let temp = pressedA;
+      temp += 'A';
+      setPressedA(temp)
+    } else if (button === 'A') {
       setPressedA('A');
     } else {
-      setPressedA();
+      setPressedA('');
     }
     setPressedB('');
 
@@ -34,7 +38,7 @@ export default function App() {
     if (button === 'B') {
       setPressedB('B');
     } else {
-      setPressedB();
+      setPressedB('b');
     }
     setPressedA('');
 

@@ -90,6 +90,14 @@ const SelectGame = ({ arrowDirection, toggleUpDown, pressedA, pressedB, handleA 
     <View style= {styles.selectGameContainer}>
       <View style= {styles.titleContainer}>
         <Text style= {styles.font}>Select Game {pressedA} {pressedB}</Text>
+        {gameList.map((game, id) => {
+              if (pressedA.slice(-2) === 'AA' && pressedA.length > 1 && id === gameID) {
+                return (
+                  <Text>{game.name} selected!</Text>
+                )
+              }
+
+            })}
       </View>
       <View style= {styles.gameSelectionContainer}>
         <Text style= {styles.font}>List of Games</Text>
@@ -113,11 +121,15 @@ const SelectGame = ({ arrowDirection, toggleUpDown, pressedA, pressedB, handleA 
               }
             })}
             {gameList.map((game, id) => {
-              if (id === gameID && pressedA) {
-                return <SelectGameModal modalVisible= {modalVisible} handleModalVisible= {handleModalVisible} handleA= {handleA} game= {game}/>
+              if (id === gameID && pressedA === 'A') {
+                return <SelectGameModal key= {id} modalVisible= {modalVisible} handleModalVisible= {handleModalVisible} handleA= {handleA} game= {game} pressedA= {pressedA}/>
               }
             })}
+
+
           </View>
+
+
         </View>
       </View>
     </View>

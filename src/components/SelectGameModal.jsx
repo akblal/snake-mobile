@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, Modal, Pressable, SafeAreaView, Image } from 'react-native';
 import { useFonts } from 'expo-font';
 
-const SelectGameModal = ({ modalVisible, handleModalVisible, handleA, game }) => {
+import ProgressBar from './ProgressBar.jsx';
+
+const SelectGameModal = ({ modalVisible, handleModalVisible, handleA, game, pressedA }) => {
+
 
   let [fontsLoaded] = useFonts({
     'PressStart2P': require('../../assets/fonts/PressStart2P-Regular.ttf'),
@@ -16,9 +19,6 @@ const SelectGameModal = ({ modalVisible, handleModalVisible, handleA, game }) =>
 
         <View style= {styles.container}>
           <View style= {styles.modalContainer}>
-            <View style= {styles.titleContainer}>
-              <Text style= {styles.font}>{game.name} {game.id}</Text>
-            </View>
             <View style= {styles.gamePictureContainer}>
               <Image
                 style= {styles.image}
@@ -34,15 +34,16 @@ const SelectGameModal = ({ modalVisible, handleModalVisible, handleA, game }) =>
                resizeMode= 'contain'
               />
             </View>
+            <View style= {styles.progressBarContainer}>
+              <ProgressBar />
+            </View>
             <View style= {styles.buttonRow}>
-              <Pressable
-                onPress={() => handleModalVisible('close')}>
+              <View>
                 <Text style={styles.closeModal}>Play</Text>
-              </Pressable>
-              <Pressable
-                onPress={() => handleModalVisible('close')}>
+              </View>
+              <View>
                 <Text style={styles.closeModal}>Back</Text>
-              </Pressable>
+              </View>
             </View>
 
           </View>
@@ -62,7 +63,7 @@ const styles = StyleSheet.create({
 
   },
   modalContainer: {
-    backgroundColor: 'white',
+    backgroundColor: 'pink',
     borderColor: 'black',
     alignItems: 'center',
     justifyContent: 'center',
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
     borderColor: 'pink',
     borderWidth: 3,
   },
-  titleContainer: {
+  progressBarContainer: {
     alignItems: 'center',
     justifyContent: 'center',
     flex: 0.5,
@@ -91,11 +92,14 @@ const styles = StyleSheet.create({
 
   },
   gamePictureContainer: {
-    flex: 4,
+    flex: 3,
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'pink',
+    marginTop: 10,
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
   },
   image: {
     flex: 1,
@@ -106,13 +110,13 @@ const styles = StyleSheet.create({
   buttonRow: {
     flex: 0.5,
     backgroundColor: 'pink',
-    borderBottomRightRadius: 10,
-    borderBottomLeftRadius: 10,
     width: '100%',
     alignItems: 'center',
     justifyContent: 'space-around',
     padding: 10,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
   },
 });
 
