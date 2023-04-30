@@ -4,7 +4,7 @@ import { useFonts } from 'expo-font';
 
 import SelectGameModal from './SelectGameModal.jsx';
 
-const SelectGame = ({ arrowDirection, toggleUpDown, pressedA, pressedB, handleA }) => {
+const SelectGame = ({ arrowDirection, toggleUpDown, pressedA, pressedB, handleA, selectGame }) => {
 
   const gameList = [
     {
@@ -65,8 +65,10 @@ const SelectGame = ({ arrowDirection, toggleUpDown, pressedA, pressedB, handleA 
   }, [toggleUpDown])
 
   useEffect(() => {
-    if (pressedA) {
+    if(pressedA.length === 1) {
       setModalVisible(true)
+    } else{
+      setModalVisible(false)
     }
   }, [pressedA])
 
@@ -78,26 +80,27 @@ const SelectGame = ({ arrowDirection, toggleUpDown, pressedA, pressedB, handleA 
     return undefined
   }
 
-  const handleModalVisible = (command) => {
-    if (command === 'close') {
-      setModalVisible(false)
-      handleA();
-    }
-
+  const chooseGame = (name) => {
+    selectGame(name);
   }
 
   return (
     <View style= {styles.selectGameContainer}>
       <View style= {styles.titleContainer}>
         <Text style= {styles.font}>Select Game {pressedA} {pressedB}</Text>
-        {gameList.map((game, id) => {
-              if (pressedA.slice(-2) === 'AA' && pressedA.length > 1 && id === gameID) {
-                return (
-                  <Text>{game.name} selected!</Text>
-                )
-              }
 
-            })}
+        {gameList.map((game, id) => {
+          if (pressedA.slice(-2) === 'AA' && pressedA.length > 1 && id === gameID) {
+            chooseGame(game.name)
+            return (
+              <Text key= {id}>{game.name} selected!</Text>
+            )
+          }
+
+        })}
+
+        {modalVisible ? <Text>Visible</Text> : <Text>Not Visible</Text>}
+
       </View>
       <View style= {styles.gameSelectionContainer}>
         <Text style= {styles.font}>List of Games</Text>
@@ -122,14 +125,10 @@ const SelectGame = ({ arrowDirection, toggleUpDown, pressedA, pressedB, handleA 
             })}
             {gameList.map((game, id) => {
               if (id === gameID && pressedA === 'A') {
-                return <SelectGameModal key= {id} modalVisible= {modalVisible} handleModalVisible= {handleModalVisible} handleA= {handleA} game= {game} pressedA= {pressedA}/>
+                return <SelectGameModal key= {id} handleA= {handleA} game= {game} pressedA= {pressedA}/>
               }
             })}
-
-
           </View>
-
-
         </View>
       </View>
     </View>

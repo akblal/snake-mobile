@@ -15,6 +15,10 @@ const SelectGameModal = ({ modalVisible, handleModalVisible, handleA, game, pres
     return undefined
   }
 
+  // useEffect(() => {
+  //   handleModalVisible('true')
+  // }, [])
+
   return (
 
         <View style= {styles.container}>
