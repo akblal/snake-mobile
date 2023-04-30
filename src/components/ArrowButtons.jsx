@@ -2,27 +2,27 @@ import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
-const ArrowButtons = ({ handleDirection }) => {
+const ArrowButtons = ({ handleDirection, modalVisible }) => {
   return (
     <View style={styles.arrowPadContainer}>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress= {() => {handleDirection('up')}}>
+        <TouchableOpacity style={styles.button} disabled= {modalVisible} onPress= {() => {handleDirection('up')}}>
           <MaterialIcons name="keyboard-arrow-up" size={50} color="white" />
         </TouchableOpacity>
       </View>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress= {() => {handleDirection('left')}}>
+        <TouchableOpacity style={styles.button} disabled= {modalVisible} onPress= {() => {handleDirection('left')}}>
           <MaterialIcons name="keyboard-arrow-left" size={50} color="white" />
         </TouchableOpacity>
         <View style={styles.centerButtonContainer}>
           <View style={styles.centerButton}></View>
         </View>
-        <TouchableOpacity style={styles.button} onPress= {() => {handleDirection('right')}}>
+        <TouchableOpacity style={styles.button} disabled= {modalVisible} onPress= {() => {handleDirection('right')}}>
           <MaterialIcons name="keyboard-arrow-right" size={50} color="white" />
         </TouchableOpacity>
       </View>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress= {() => {handleDirection('down')}}>
+        <TouchableOpacity style={styles.button} disabled= {modalVisible} onPress= {() => {handleDirection('down')}}>
           <MaterialIcons name="keyboard-arrow-down" size={50} color="white" />
         </TouchableOpacity>
       </View>

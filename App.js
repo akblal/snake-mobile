@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { GestureHandlerRootView, PanGestureHandler } from 'react-native-gesture-handler';
@@ -12,6 +12,15 @@ export default function App() {
   const [toggleUpDown, setToggleUpDown] = useState(true);
   const [pressedA, setPressedA] = useState('');
   const [pressedB, setPressedB] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
+
+  useEffect(() => {
+    if(pressedA.length === 1) {
+      setModalVisible(true)
+    } else{
+      setModalVisible(false)
+    }
+  }, [pressedA])
 
   const handleDirection = (direction) => {
     setArrowDirection(direction)
@@ -48,10 +57,10 @@ export default function App() {
     <SafeAreaView style= {styles.container}>
       <View style= {styles.gameContainer}>
         <View style= {styles.powerButton}></View>
-        <GameScreen arrowDirection= {arrowDirection} toggleUpDown= {toggleUpDown} pressedA= {pressedA} pressedB= {pressedB} handleA= {handleA}/>
+        <GameScreen arrowDirection= {arrowDirection} toggleUpDown= {toggleUpDown} pressedA= {pressedA} pressedB= {pressedB} handleA= {handleA} modalVisible= {modalVisible}/>
       </View>
       <View style= {styles.controllerContainer}>
-        <GameController handleDirection= {handleDirection} handleA= {handleA} handleB = {handleB}/>
+        <GameController handleDirection= {handleDirection} handleA= {handleA} handleB = {handleB} modalVisible= {modalVisible}/>
       </View>
       <StatusBar style="auto" />
     </SafeAreaView>

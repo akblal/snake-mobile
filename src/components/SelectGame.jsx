@@ -4,7 +4,7 @@ import { useFonts } from 'expo-font';
 
 import SelectGameModal from './SelectGameModal.jsx';
 
-const SelectGame = ({ arrowDirection, toggleUpDown, pressedA, pressedB, handleA, selectGame }) => {
+const SelectGame = ({ arrowDirection, toggleUpDown, pressedA, pressedB, handleA, selectGame, modalVisible }) => {
 
   const gameList = [
     {
@@ -39,7 +39,7 @@ const SelectGame = ({ arrowDirection, toggleUpDown, pressedA, pressedB, handleA,
 
   const [gameID, setGameID] = useState(0);
   const [showText, setShowText] = useState(true);
-  const [modalVisible, setModalVisible] = useState(false);
+  // const [modalVisible, setModalVisible] = useState(false);
 
   // Change the state per set time to allow for blinking effect.
   useEffect(() => {
@@ -64,13 +64,13 @@ const SelectGame = ({ arrowDirection, toggleUpDown, pressedA, pressedB, handleA,
     }
   }, [toggleUpDown])
 
-  useEffect(() => {
-    if(pressedA.length === 1) {
-      setModalVisible(true)
-    } else{
-      setModalVisible(false)
-    }
-  }, [pressedA])
+  // useEffect(() => {
+  //   if(pressedA.length === 1) {
+  //     setModalVisible(true)
+  //   } else{
+  //     setModalVisible(false)
+  //   }
+  // }, [pressedA])
 
   let [fontsLoaded] = useFonts({
     'PressStart2P': require('../../assets/fonts/PressStart2P-Regular.ttf'),
