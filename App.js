@@ -40,7 +40,6 @@ export default function App() {
       setPressedA('');
     }
     setPressedB('');
-
   }
 
   const handleB = (button) => {

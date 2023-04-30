@@ -39,7 +39,6 @@ const SelectGame = ({ arrowDirection, toggleUpDown, pressedA, pressedB, handleA,
 
   const [gameID, setGameID] = useState(0);
   const [showText, setShowText] = useState(true);
-  // const [modalVisible, setModalVisible] = useState(false);
 
   // Change the state per set time to allow for blinking effect.
   useEffect(() => {
@@ -63,14 +62,6 @@ const SelectGame = ({ arrowDirection, toggleUpDown, pressedA, pressedB, handleA,
       }
     }
   }, [toggleUpDown])
-
-  // useEffect(() => {
-  //   if(pressedA.length === 1) {
-  //     setModalVisible(true)
-  //   } else{
-  //     setModalVisible(false)
-  //   }
-  // }, [pressedA])
 
   let [fontsLoaded] = useFonts({
     'PressStart2P': require('../../assets/fonts/PressStart2P-Regular.ttf'),
@@ -124,7 +115,7 @@ const SelectGame = ({ arrowDirection, toggleUpDown, pressedA, pressedB, handleA,
               }
             })}
             {gameList.map((game, id) => {
-              if (id === gameID && pressedA === 'A') {
+              if (id === gameID && (pressedA.slice(-1) === 'A' && pressedA.length % 2 === 1)) {
                 return <SelectGameModal key= {id} handleA= {handleA} game= {game} pressedA= {pressedA}/>
               }
             })}
