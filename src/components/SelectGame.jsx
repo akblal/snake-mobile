@@ -10,30 +10,37 @@ const SelectGame = ({ arrowDirection, toggleUpDown, pressedA, pressedB, handleA,
     {
       id: 0,
       name: 'Snake',
+      available: true,
     },
     {
       id: 1,
       name: 'Tetris',
+      available: false,
     },
     {
       id: 2,
       name: 'Bomberman',
+      available: false,
     },
     {
       id: 3,
       name: 'Pokemon Red',
+      available: false,
     },
     {
       id: 4,
       name: 'Metroid II',
+      available: false,
     },
     {
       id: 5,
       name: 'Super Mario Bros',
+      available: false,
     },
     {
       id: 6,
       name: 'Zelda',
+      available: false,
     },
   ]
 

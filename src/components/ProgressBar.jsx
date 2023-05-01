@@ -22,19 +22,43 @@ function useInterval(callback, delay) {
   }, [delay]);
 }
 
-const ProgressBar = () => {
+const ProgressBar = ({ game, failEndPercent, getProgress }) => {
 
   let animation = useRef(new Animated.Value(0));
   const [progress, setProgress] = useState(0);
+
+
   useInterval(() => {
-    // update progress until 100
-    let update = Math.floor(Math.random() * 50);
-    if (progress + update > 100) {
-      update = 100 - progress;
+    if (game.available) {
+      // update progress until 100
+      let update = Math.floor(Math.random() * 50);
+
+      if (progress + update > 100) {
+        update = 100 - progress;
+      }
+
+      getProgress(progress + update);
+
+      if(progress < 100) {
+        setProgress(progress + update);
+      }
+
+    } else {
+      let update = Math.floor(Math.random() * 50);
+      if (progress + update > failEndPercent) {
+        update = failEndPercent - progress;
+      }
+
+      getProgress(progress + update);
+
+
+      if(progress < failEndPercent) {
+        setProgress(progress + update);
+      }
     }
-    if(progress < 100) {
-      setProgress(progress + update);
-    }
+
+
+
   }, 1000);
 
   useEffect(() => {
@@ -45,7 +69,14 @@ const ProgressBar = () => {
     }).start();
   },[progress])
 
+
   const width = animation.current.interpolate({
+    inputRange: [0, 100],
+    outputRange: ["0%", "100%"],
+    extrapolate: "clamp"
+  })
+
+  const widthFail = animation.current.interpolate({
     inputRange: [0, 100],
     outputRange: ["0%", "100%"],
     extrapolate: "clamp"
@@ -53,18 +84,24 @@ const ProgressBar = () => {
 
   return (
     <View style={styles.container}>
-      { progress === 100 ?
-        <Text>Loading Complete!</Text>  :
-        <Text>Loading...</Text>
+
+      {game.available && progress === 100 ?
+        <Text>Loading Complete!</Text> :
+        game.available && <Text>Loading...</Text>
+      }
+      {!(game.available) && progress < failEndPercent ?
+        <Text>Loading...</Text> :
+        !(game.available) && <Text>Load Failed</Text>
       }
 
-      <View style={styles.progressBar}>
-        <Animated.View style={[StyleSheet.absoluteFill, { backgroundColor: "teal", width }]}/>
-      </View>
-      <Text>
-        {`${progress}%`}
-      </Text>
-
+      {game.available ?
+        <View style={styles.progressBar}>
+          <Animated.View style={[StyleSheet.absoluteFill, { backgroundColor: "teal", width }]}/>
+        </View> :
+        <View style={styles.progressBar}>
+          <Animated.View style={[StyleSheet.absoluteFill, { backgroundColor: "red", width: widthFail }]}/>
+        </View>
+      }
     </View>
   )
 
@@ -80,8 +117,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'pink',
     padding: 8,
     width: '100%',
-    // borderColor: 'black',
-    // borderWidth: 1,
   },
   progressBar: {
     height: 20,
@@ -94,3 +129,10 @@ const styles = StyleSheet.create({
 });
 
 export default ProgressBar
+
+{/* <Text>
+{progress}%
+</Text>
+<Text>
+{progress}% {failEndPercent}%
+</Text> */}

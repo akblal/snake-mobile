@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, Modal, Pressable, SafeAreaView, Image } from 'react-native';
 import { useFonts } from 'expo-font';
 
@@ -6,6 +6,8 @@ import ProgressBar from './ProgressBar.jsx';
 
 const SelectGameModal = ({ modalVisible, handleModalVisible, handleA, game, pressedA }) => {
 
+  const [failEndPercent, setFailEndPercent] = useState(Math.floor(Math.random()*21) + 5);
+  const [playable, setPlayable] = useState(false);
 
   let [fontsLoaded] = useFonts({
     'PressStart2P': require('../../assets/fonts/PressStart2P-Regular.ttf'),
@@ -15,9 +17,11 @@ const SelectGameModal = ({ modalVisible, handleModalVisible, handleA, game, pres
     return undefined
   }
 
-  // useEffect(() => {
-  //   handleModalVisible('true')
-  // }, [])
+  const getProgress = (percentage) =>{
+    if (percentage === 100) {
+      setPlayable(true)
+    }
+  }
 
   return (
 
@@ -39,17 +43,16 @@ const SelectGameModal = ({ modalVisible, handleModalVisible, handleA, game, pres
               />
             </View>
             <View style= {styles.progressBarContainer}>
-              <ProgressBar />
+              <ProgressBar game= {game} failEndPercent= {failEndPercent} getProgress= {getProgress}/>
             </View>
             <View style= {styles.buttonRow}>
               <View>
-                <Text style={styles.closeModal}>Play</Text>
+                <Text style={playable ? styles.closeModal : [styles.notPlayable, styles.closeModal]}>Play</Text>
               </View>
               <View>
                 <Text style={styles.closeModal}>Back</Text>
               </View>
             </View>
-
           </View>
         </View>
 
@@ -94,6 +97,9 @@ const styles = StyleSheet.create({
   },
   closeModal: {
 
+  },
+  notPlayable: {
+    color: 'grey',
   },
   gamePictureContainer: {
     flex: 3,
