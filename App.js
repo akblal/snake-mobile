@@ -13,6 +13,7 @@ export default function App() {
   const [pressedA, setPressedA] = useState('');
   const [pressedB, setPressedB] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
+  const [disableA, setDisableA] = useState(false);
 
   useEffect(() => {
     if(pressedA.length === 1) {
@@ -45,21 +46,26 @@ export default function App() {
   const handleB = (button) => {
     if (button === 'B') {
       setPressedB('B');
+      disableAButton(false);
     } else {
-      setPressedB('b');
+      setPressedB('');
     }
     setPressedA('');
 
+  }
+
+  const disableAButton = (boolean) => {
+    setDisableA(boolean);
   }
 
   return (
     <SafeAreaView style= {styles.container}>
       <View style= {styles.gameContainer}>
         <View style= {styles.powerButton}></View>
-        <GameScreen arrowDirection= {arrowDirection} toggleUpDown= {toggleUpDown} pressedA= {pressedA} pressedB= {pressedB} handleA= {handleA} modalVisible= {modalVisible}/>
+        <GameScreen arrowDirection= {arrowDirection} toggleUpDown= {toggleUpDown} pressedA= {pressedA} pressedB= {pressedB} handleA= {handleA} modalVisible= {modalVisible} disableAButton= {disableAButton}/>
       </View>
       <View style= {styles.controllerContainer}>
-        <GameController handleDirection= {handleDirection} handleA= {handleA} handleB = {handleB} modalVisible= {modalVisible}/>
+        <GameController handleDirection= {handleDirection} handleA= {handleA} handleB = {handleB} modalVisible= {modalVisible} disableA= {disableA}/>
       </View>
       <StatusBar style="auto" />
     </SafeAreaView>

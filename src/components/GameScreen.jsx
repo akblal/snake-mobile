@@ -6,7 +6,7 @@ import SnakeGame from './SnakeGame';
 
 import SelectGame from './SelectGame.jsx';
 
-const GameScreen = ({ arrowDirection, toggleUpDown, pressedA, pressedB, handleA, modalVisible }) => {
+const GameScreen = ({ arrowDirection, toggleUpDown, pressedA, pressedB, handleA, modalVisible, disableAButton }) => {
 
   const [chosenGame, setChosenGame] = useState('');
 
@@ -26,8 +26,7 @@ const GameScreen = ({ arrowDirection, toggleUpDown, pressedA, pressedB, handleA,
 
   return (
     <View style= {styles.gameScreenContainer}>
-      <SelectGame arrowDirection= {arrowDirection} toggleUpDown= {toggleUpDown} pressedA= {pressedA} pressedB= {pressedB} handleA= {handleA} selectGame= {selectGame} modalVisible= {modalVisible}/>
-
+      <SelectGame arrowDirection= {arrowDirection} toggleUpDown= {toggleUpDown} pressedA= {pressedA} pressedB= {pressedB} handleA= {handleA} selectGame= {selectGame} modalVisible= {modalVisible} disableAButton= {disableAButton}/>
     </View>
   );
 };

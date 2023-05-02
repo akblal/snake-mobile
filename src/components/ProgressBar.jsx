@@ -27,7 +27,6 @@ const ProgressBar = ({ game, failEndPercent, getProgress }) => {
   let animation = useRef(new Animated.Value(0));
   const [progress, setProgress] = useState(0);
 
-
   useInterval(() => {
     if (game.available) {
       // update progress until 100
@@ -36,9 +35,7 @@ const ProgressBar = ({ game, failEndPercent, getProgress }) => {
       if (progress + update > 100) {
         update = 100 - progress;
       }
-
       getProgress(progress + update);
-
       if(progress < 100) {
         setProgress(progress + update);
       }
@@ -48,17 +45,11 @@ const ProgressBar = ({ game, failEndPercent, getProgress }) => {
       if (progress + update > failEndPercent) {
         update = failEndPercent - progress;
       }
-
       getProgress(progress + update);
-
-
       if(progress < failEndPercent) {
         setProgress(progress + update);
       }
     }
-
-
-
   }, 1000);
 
   useEffect(() => {

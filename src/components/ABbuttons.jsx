@@ -2,7 +2,7 @@ import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
-const ABbuttons = ({ handleA, handleB }) => {
+const ABbuttons = ({ handleA, handleB, disableA }) => {
   return (
     <View style= {styles.ABButtonContainer}>
       <View style={styles.bButtonContainer}>
@@ -11,7 +11,7 @@ const ABbuttons = ({ handleA, handleB }) => {
         </TouchableOpacity>
       </View>
       <View style={styles.aButtonContainer}>
-        <TouchableOpacity style={styles.buttonStyle} onPress= {() => handleA('A')}>
+        <TouchableOpacity style={styles.buttonStyle} disabled= {disableA} onPress= {() => handleA('A')}>
           <Text style={styles.buttonText} >A</Text>
         </TouchableOpacity>
       </View>

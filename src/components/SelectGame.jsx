@@ -4,7 +4,7 @@ import { useFonts } from 'expo-font';
 
 import SelectGameModal from './SelectGameModal.jsx';
 
-const SelectGame = ({ arrowDirection, toggleUpDown, pressedA, pressedB, handleA, selectGame, modalVisible }) => {
+const SelectGame = ({ arrowDirection, toggleUpDown, pressedA, pressedB, handleA, selectGame, modalVisible, disableAButton }) => {
 
   const gameList = [
     {
@@ -123,7 +123,7 @@ const SelectGame = ({ arrowDirection, toggleUpDown, pressedA, pressedB, handleA,
             })}
             {gameList.map((game, id) => {
               if (id === gameID && (pressedA.slice(-1) === 'A' && pressedA.length % 2 === 1)) {
-                return <SelectGameModal key= {id} handleA= {handleA} game= {game} pressedA= {pressedA}/>
+                return <SelectGameModal key= {id} handleA= {handleA} game= {game} pressedA= {pressedA} disableAButton= {disableAButton}/>
               }
             })}
           </View>

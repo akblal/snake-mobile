@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, Modal, Pressable, SafeAreaView, Image } from 'react-native';
 import { useFonts } from 'expo-font';
 
 import ProgressBar from './ProgressBar.jsx';
 
-const SelectGameModal = ({ modalVisible, handleModalVisible, handleA, game, pressedA }) => {
+const SelectGameModal = ({ modalVisible, handleModalVisible, handleA, game, pressedA, disableAButton }) => {
 
   const [failEndPercent, setFailEndPercent] = useState(Math.floor(Math.random()*21) + 5);
   const [playable, setPlayable] = useState(false);
@@ -19,7 +19,14 @@ const SelectGameModal = ({ modalVisible, handleModalVisible, handleA, game, pres
 
   const getProgress = (percentage) =>{
     if (percentage === 100) {
-      setPlayable(true)
+      setPlayable(true);
+      disableAButton(false);
+
+    } else {
+      disableAButton(true)
+    }
+    if (!game.available) {
+      disableAButton(true)
     }
   }
 
