@@ -98,6 +98,7 @@ const ProgressBar = ({ game, failEndPercent, getProgress }) => {
 
       {game.available && progress === 100 ?
         <Text style= {[styles.loadingText, {color: showText ? 'black' : 'pink'}]}>Loading Complete!</Text> :
+        game.available && progress > 60 ? <Text style= {styles.loadingText}>Almost There...</Text> :
         game.available && <Text style= {styles.loadingText}>Loading...</Text>
       }
       {!(game.available) && progress < failEndPercent ?
