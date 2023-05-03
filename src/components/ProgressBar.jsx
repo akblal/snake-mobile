@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Animated} from 'react-native';
-
+import { useFonts } from 'expo-font';
 
 function useInterval(callback, delay) {
   const savedCallback = useRef();
@@ -76,16 +76,24 @@ const ProgressBar = ({ game, failEndPercent, getProgress }) => {
     extrapolate: "clamp"
   })
 
+  let [fontsLoaded] = useFonts({
+    'PressStart2P': require('../../assets/fonts/PressStart2P-Regular.ttf'),
+  })
+
+  if (!fontsLoaded) {
+    return undefined
+  }
+
   return (
     <View style={styles.container}>
 
       {game.available && progress === 100 ?
-        <Text>Loading Complete!</Text> :
-        game.available && <Text>Loading...</Text>
+        <Text style= {styles.loadingText}>Loading Complete!</Text> :
+        game.available && <Text style= {styles.loadingText}>Loading...</Text>
       }
       {!(game.available) && progress < failEndPercent ?
-        <Text>Loading...</Text> :
-        !(game.available) && <Text>Load Failed</Text>
+        <Text style= {styles.loadingText}>Loading...</Text> :
+        !(game.available) && <Text style= {styles.loadingText}>Load Failed</Text>
       }
 
       {game.available ?
@@ -112,6 +120,10 @@ const styles = StyleSheet.create({
     padding: 8,
     width: '100%',
   },
+  loadingText:  {
+    marginBottom: 5,
+    fontFamily: 'PressStart2P',
+  },
   progressBar: {
     height: 20,
     flexDirection: "row",
@@ -123,10 +135,3 @@ const styles = StyleSheet.create({
 });
 
 export default ProgressBar
-
-{/* <Text>
-{progress}%
-</Text>
-<Text>
-{progress}% {failEndPercent}%
-</Text> */}

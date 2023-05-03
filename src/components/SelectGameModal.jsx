@@ -57,13 +57,13 @@ const SelectGameModal = ({ modalVisible, handleModalVisible, handleA, game, pres
                 <View style={playable ? styles.buttonStyle : [styles.buttonStyle, styles.notPlayable]}>
                   <Text style={styles.buttonText} >A</Text>
                 </View>
-                <Text style={playable ? null: styles.notPlayable}>Play</Text>
+                <Text style={playable ? [styles.font, styles.smallFont]: [styles.notPlayable, styles.font, styles.smallFont]}>Play</Text>
               </View>
               <View style= {styles.formatButtonText}>
                 <View style={styles.buttonStyle}>
                   <Text style={styles.buttonText} >B</Text>
                 </View>
-                <Text>Back</Text>
+                <Text style= {[styles.font, styles.smallFont]}>Back</Text>
               </View>
             </View>
           </View>
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
   formatButtonText: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: '33%',
+    width: '40%',
     justifyContent: 'space-evenly',
     padding: 5,
     borderWidth: 1,
@@ -163,6 +163,9 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: 'bold',
   },
+  smallFont: {
+    fontSize: 10,
+  }
 });
 
 export default SelectGameModal
