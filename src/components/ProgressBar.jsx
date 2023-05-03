@@ -26,6 +26,7 @@ const ProgressBar = ({ game, failEndPercent, getProgress }) => {
 
   let animation = useRef(new Animated.Value(0));
   const [progress, setProgress] = useState(0);
+  const [showText, setShowText] = useState(true);
 
   useInterval(() => {
     if (game.available) {
@@ -76,6 +77,14 @@ const ProgressBar = ({ game, failEndPercent, getProgress }) => {
     extrapolate: "clamp"
   })
 
+  // Change the state per set time to allow for blinking effect.
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setShowText((showText) => !showText);
+    }, 750);
+    return () => clearInterval(interval);
+  }, []);
+
   let [fontsLoaded] = useFonts({
     'PressStart2P': require('../../assets/fonts/PressStart2P-Regular.ttf'),
   })
@@ -88,12 +97,12 @@ const ProgressBar = ({ game, failEndPercent, getProgress }) => {
     <View style={styles.container}>
 
       {game.available && progress === 100 ?
-        <Text style= {styles.loadingText}>Loading Complete!</Text> :
+        <Text style= {[styles.loadingText, {color: showText ? 'black' : 'pink'}]}>Loading Complete!</Text> :
         game.available && <Text style= {styles.loadingText}>Loading...</Text>
       }
       {!(game.available) && progress < failEndPercent ?
         <Text style= {styles.loadingText}>Loading...</Text> :
-        !(game.available) && <Text style= {styles.loadingText}>Load Failed</Text>
+        !(game.available) && <Text style= {[styles.loadingText, {color: showText ? 'black' : 'pink'}]}>Load Failed</Text>
       }
 
       {game.available ?
