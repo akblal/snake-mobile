@@ -53,11 +53,17 @@ const SelectGameModal = ({ modalVisible, handleModalVisible, handleA, game, pres
               <ProgressBar game= {game} failEndPercent= {failEndPercent} getProgress= {getProgress}/>
             </View>
             <View style= {styles.buttonRow}>
-              <View>
-                <Text style={playable ? styles.closeModal : [styles.notPlayable, styles.closeModal]}>Play</Text>
+              <View style= {styles.formatButtonText}>
+                <View style={playable ? styles.buttonStyle : [styles.buttonStyle, styles.notPlayable]}>
+                  <Text style={styles.buttonText} >A</Text>
+                </View>
+                <Text style={playable ? null: styles.notPlayable}>Play</Text>
               </View>
-              <View>
-                <Text style={styles.closeModal}>Back</Text>
+              <View style= {styles.formatButtonText}>
+                <View style={styles.buttonStyle}>
+                  <Text style={styles.buttonText} >B</Text>
+                </View>
+                <Text>Back</Text>
               </View>
             </View>
           </View>
@@ -102,11 +108,9 @@ const styles = StyleSheet.create({
   font: {
     fontFamily: 'PressStart2P',
   },
-  closeModal: {
-
-  },
   notPlayable: {
-    color: 'grey',
+    color: 'lightgrey',
+    opacity: 0.25,
   },
   gamePictureContainer: {
     flex: 3,
@@ -134,6 +138,30 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     borderBottomRightRadius: 10,
     borderBottomLeftRadius: 10,
+  },
+  formatButtonText: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '33%',
+    justifyContent: 'space-evenly',
+    padding: 5,
+    borderWidth: 1,
+    borderColor: 'black',
+    borderRadius: '10%',
+    backgroundColor: 'green',
+  },
+  buttonStyle: {
+    width: 25,
+    height: 25,
+    backgroundColor: '#2B2B2B',
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 10,
+    fontWeight: 'bold',
   },
 });
 
