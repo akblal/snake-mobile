@@ -1,9 +1,20 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 
-const SnakeGame = ({ chosenGame }) => {
+const SnakeGame = ({ chosenGame, backToHome, pressedB }) => {
+
+  useEffect(() => {
+    if (pressedB === 'B') {
+      backToHome()
+    }
+  }, [pressedB])
+
   return (
-    <Text>We are playing {chosenGame}</Text>
+    <View>
+      <Text>Welcome to {chosenGame}</Text>
+      <Text>{pressedB}</Text>
+    </View>
+
   )
 }
 

@@ -24,9 +24,21 @@ const GameScreen = ({ arrowDirection, toggleUpDown, pressedA, pressedB, handleA,
     }
   }
 
+  const backToHome = () => {
+    setChosenGame('')
+  }
+
   return (
     <View style= {styles.gameScreenContainer}>
-      <SelectGame arrowDirection= {arrowDirection} toggleUpDown= {toggleUpDown} pressedA= {pressedA} pressedB= {pressedB} handleA= {handleA} selectGame= {selectGame} modalVisible= {modalVisible} disableAButton= {disableAButton}/>
+      {chosenGame.length === 0 ?
+        <SelectGame arrowDirection= {arrowDirection} toggleUpDown= {toggleUpDown} pressedA= {pressedA} pressedB= {pressedB} handleA= {handleA} selectGame= {selectGame} modalVisible= {modalVisible} disableAButton= {disableAButton}/> :
+        null
+      }
+      {chosenGame.length ?
+        <SnakeGame chosenGame= {chosenGame} backToHome={backToHome} pressedB= {pressedB}/> :
+        null
+      }
+
     </View>
   );
 };
