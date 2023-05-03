@@ -60,6 +60,9 @@ const ProgressBar = ({ game, failEndPercent, getProgress }) => {
     }).start();
   },[progress])
 
+  useEffect(() => {
+    getProgress(progress)
+  }, [])
 
   const width = animation.current.interpolate({
     inputRange: [0, 100],

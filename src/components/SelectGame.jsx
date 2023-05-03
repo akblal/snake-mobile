@@ -121,7 +121,7 @@ const SelectGame = ({ arrowDirection, toggleUpDown, pressedA, pressedB, handleA,
             })}
             {gameList.map((game, id) => {
               if (id === gameID && (pressedA.slice(-1) === 'A' && pressedA.length % 2 === 1)) {
-                disableAButton(true);
+
                 return <SelectGameModal key= {id} handleA= {handleA} game= {game} pressedA= {pressedA} disableAButton= {disableAButton}/>
               }
             })}
